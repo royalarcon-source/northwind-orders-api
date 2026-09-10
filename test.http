@@ -1,0 +1,49 @@
+### 1. Estado del Servidor
+GET http://localhost:3000/health
+
+### 2. Listar Clientes
+GET http://localhost:3000/customers
+
+### 3. Listar Productos Disponibles
+GET http://localhost:3000/products
+
+### 4. Crear una Orden Exitosa (POST 201)
+POST http://localhost:3000/orders
+Content-Type: application/json
+
+{
+  "customer_id": "ALFKI",
+  "employee_id": 1,
+  "ship_address": "Av. 6 de Agosto #2450, La Paz",
+  "items": [
+    { "product_id": 1, "quantity": 2, "discount": 0 },
+    { "product_id": 2, "quantity": 1, "discount": 0.05 }
+  ]
+}
+
+### 5. Consultar la Orden Creada (Reemplaza el ID por el obtenido en el paso 4)
+GET http://localhost:3000/orders/11082
+
+### 6. Prueba de Error Controlado: Cliente Inexistente (404)
+POST http://localhost:3000/orders
+Content-Type: application/json
+
+{
+  "customer_id": "NOEXISTE",
+  "employee_id": 1,
+  "items": [
+    { "product_id": 1, "quantity": 1 }
+  ]
+}
+
+### 7. Prueba de Error Controlado: Cantidad Inválida (400)
+POST http://localhost:3000/orders
+Content-Type: application/json
+
+{
+  "customer_id": "ALFKI",
+  "employee_id": 1,
+  "items": [
+    { "product_id": 1, "quantity": 0 }
+  ]
+}
